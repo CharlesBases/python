@@ -4,7 +4,6 @@ import logging
 import os
 from logging import handlers
 
-
 logger_name = "logger"
 logger_level = logging.DEBUG
 logger_tofile = True
@@ -16,7 +15,10 @@ def New():
     logger.setLevel(logger_level)
 
     # format
-    logger_format = logging.Formatter("[%(asctime)s.%(msecs)03d][%(levelno)s] %(pathname)s:%(lineno)d(%(funcName)s) ==> %(message)s", "%Y-%m-%d %H:%M:%S")
+    logger_format = logging.Formatter("[%(asctime)s.%(msecs)03d][%(level)s] %(pathname)s:%(lineno)d(%(funcName)s) ==> %(message)s", "%Y-%m-%d %H:%M:%S")
+
+    # Filter
+    logger.addFilter(Context())
 
     # console handler
     handler_console = logging.StreamHandler()
@@ -43,3 +45,13 @@ def New():
             print(error)
 
     return logger
+
+
+class Context(logging.Filter):
+    def __init__(self):
+        self.level = {10: "DBG", 20: "INF", 30: "WRN", 40: "ERR", 50: "CRT"}
+
+    def filter(self, record):
+        if record.levelno in self.level:
+            record.level = self.level[record.levelno]
+            return True
