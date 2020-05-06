@@ -18,7 +18,7 @@ class New(object):
             cursor.execute(sql)
             return cursor.fetchall()
         except pymysql.MySQLError as error:
-            print(error)
+            print("sql: %s\nerr: %s" % (sql, error))
             return {}
         finally:
             cursor.close()
@@ -31,7 +31,7 @@ class New(object):
             self.connect.commit()
         except pymysql.MySQLError as error:
             self.connect.rollback()
-            print(error)
+            print("sql: %s\nerr: %s" % (sql, error))
         finally:
             cursor.close()
 
@@ -43,7 +43,7 @@ class New(object):
             self.connect.commit()
         except pymysql.MySQLError as error:
             self.connect.rollback()
-            print(error)
+            print("sql: %s\nerr: %s" % (sql, error))
         finally:
             cursor.close()
 
@@ -55,6 +55,6 @@ class New(object):
             self.connect.commit()
         except pymysql.MySQLError as error:
             self.connect.rollback()
-            print(error)
+            print("sql: %s\nerr: %s" % (sql, error))
         finally:
             cursor.close()
