@@ -4,12 +4,12 @@ import pymysql
 
 
 class New(object):
-    def __init__(self, host="localhost", port=3306, user="root", passwd="passwd", dbname="user"):
+    def __init__(self, host, port, user, passwd, dbname):
         try:
-            self.connect = pymysql.connect(host=host, port=port, user=user, passwd=passwd, db=dbname, charset="utf8mb4", read_timeout=3, write_timeout=3, connect_timeout=3, cursorclass=pymysql.cursors.DictCursor)
+            self.connect = pymysql.connect(**{"host": host, "port": port, "user": user, "password": passwd, "db": dbname, "charset": "utf8mb4", "read_timeout": 3, "write_timeout": 3, "connect_timeout": 3, "cursorclass": pymysql.cursors.DictCursor,})
             self.connect.ping(reconnect=True)
         except pymysql.MySQLError as error:
-            print(error)
+            print("connect mysql error: %s" % (error))
             exit(0)
 
     def select(self, sql):
