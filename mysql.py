@@ -6,7 +6,7 @@ import pymysql
 class New(object):
     def __init__(self, host, port, user, passwd, dbname):
         try:
-            self.connect = pymysql.connect(**{"host": host, "port": port, "user": user, "password": passwd, "db": dbname, "charset": "utf8mb4", "read_timeout": 3, "write_timeout": 3, "connect_timeout": 3, "cursorclass": pymysql.cursors.DictCursor,})
+            self.connect = pymysql.connect(**{"host": host, "port": port, "user": user, "password": passwd, "db": dbname, "charset": "utf8mb4", "read_timeout": 3, "write_timeout": 3, "connect_timeout": 3, "cursorclass": pymysql.cursors.DictCursor})
             self.connect.ping(reconnect=True)
         except pymysql.MySQLError as error:
             print("connect mysql error: %s" % (error))
