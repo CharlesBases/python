@@ -6,7 +6,7 @@ from logging import handlers
 
 logger_name = "logger"
 logger_level = logging.DEBUG
-logger_tofile = True
+logger_tofile = False
 logger_filepath = "./log/logger.log"
 
 
