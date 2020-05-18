@@ -3,7 +3,7 @@
 import time, datetime
 import unittest
 
-from utils import logger
+from utils import logger, request
 
 
 class Test(unittest.TestCase):
@@ -20,8 +20,4 @@ class Test(unittest.TestCase):
         pass
 
     def test_request(self):
-        start_timens = time.time_ns()
-        start_date = datetime.datetime.now()
-        print(time.mktime(time.strptime("%Y-%m-%d %H:%M:%S.%f", start_date)))
-        time.sleep(1.5)
-        print(time.strftime("%Y-%m-%d %H:%M:%S.%f", time.localtime(start_timens / 1e9)))
+        request.get("http://www.baidu.com")
